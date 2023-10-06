@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Check if the file exist and was provided as an argument
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <source_file>"
+    exit 1
+fi
+
+# Get the source file name from the command line argument
+#dont put space betwen  declaration sourcefile="$1"
+source_file="$1"
+
+# Check if the file exist
+#add space [ exeple ]
+if [ -f "$source_file" ]; then
+    echo "Compilation $source_file..."
+    #Extracting the file name without the extention to use it as executable
+    executable_file="${source_file%.*}"
+
+    #Compile the file
+    gcc -Wall -pedantic -Werror -Wextra -std=gnu89 "$source_file" -o "$executable_file"
+
+    if [ $? -eq 0 ]; then
+        echo "Comilation Successful. '$excutable_file' Created"
+    else
+        echo "Compilation Failed"
+    fi
+else
+    echo "Error: $source_file not found. "
+fi
