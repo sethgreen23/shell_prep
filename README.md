@@ -1,1 +1,2 @@
-Shell Exercices
+# Shell Exercices - Simple Shell
+
