@@ -6,8 +6,12 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
-char **split_str(char *cmd, const char *delim);
-char *_strtok(char *str, const char *delim);
+extern char **environ;
+char *_evaluate(char *cmd);
+int _getline();
+void _tokenizer(char *cmd);
+int _execve(char *pathname, char*argv[]);
+
 #endif
