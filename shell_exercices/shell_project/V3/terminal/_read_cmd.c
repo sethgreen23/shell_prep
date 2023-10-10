@@ -13,7 +13,7 @@ char *_read_cmd()
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, "$ ", 2);
 	n_char = getline(&line, &len, stdin);
-	if (n_char == EOF)
+	if (n_char == -1)
 	{
 		free(line);
 		return (NULL);

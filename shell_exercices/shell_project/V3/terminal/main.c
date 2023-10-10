@@ -9,11 +9,10 @@
 */
 int main(int ac, char **av)
 {
-	char *line = NULL;
+	char *line = NULL, **command = NULL;
 	int status = 0;
 
 	(void)ac;
-	(void)av;
 	while (1)
 	{
 		line = _read_cmd();
@@ -23,7 +22,14 @@ int main(int ac, char **av)
 				write(STDOUT_FILENO, "\n", 1);
 			return (status);
 		}
+		command = _tokenizer(line);
+		if (command == NULL)
+		{
+			free(line);
+			continue;
+		}
 		free(line);
+		status = _execute(command, av);
 	}
-	return (0);
+	return (status);
 }

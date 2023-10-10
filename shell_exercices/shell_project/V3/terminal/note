@@ -1,5 +1,4 @@
+*getline	
+	return NULL
+		when there is end of file we free before return
 
-		/*
-		 *command = _tokenizer(line);
-	     *status = _execute(command, av);
-		*/
