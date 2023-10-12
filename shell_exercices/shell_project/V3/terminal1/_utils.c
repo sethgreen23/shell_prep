@@ -30,3 +30,22 @@ void free2DI(char **arr, int position)
 		free(arr[j]);
 	free(arr);
 }
+/**
+ * _getenv - return the envirement variable value if exist
+ * @env_name: name of the envirement variable
+ *
+ * Return: Nothing
+*/
+char *_getenv(char *env_name)
+{
+	int len, i, found;
+
+	len = _strlen(env_name);
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		found = !_strcmp_limit(environ[i], env_name, len) && environ[i][len] == '=';
+		if (found)
+			return (&environ[i][len + 1]);
+	}
+	return (NULL);
+}
