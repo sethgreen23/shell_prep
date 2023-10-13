@@ -60,6 +60,8 @@ char *_check_command(char *command)
 	char *key = "PATH", *copy_env = NULL, *token = NULL, *test_char = NULL;
 	struct stat st;
 
+	if (command == NULL)
+		return (NULL);
 	if (command[0] == '/')
 	{
 		if (!stat(command, &st))

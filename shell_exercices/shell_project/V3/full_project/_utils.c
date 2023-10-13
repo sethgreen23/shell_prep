@@ -12,8 +12,8 @@ void free2D(char **arr)
 	if (arr == NULL)
 		return;
 	for (i = 0; arr[i] != NULL; i++)
-		free(arr[i]);
-	free(arr);
+		free(arr[i]), arr[i] = NULL;
+	free(arr), arr = NULL;
 }
 /**
  * free2DI - free 2D array from position i
@@ -26,9 +26,11 @@ void free2DI(char **arr, int position)
 {
 	int j;
 
+	if (arr == NULL)
+		return;
 	for (; j < position; j++)
-		free(arr[j]);
-	free(arr);
+		free(arr[j]), arr[j] = NULL;
+	free(arr), arr = NULL;
 }
 /**
  * _getenv - return the envirement variable value if exist
@@ -45,7 +47,7 @@ char *_getenv(char *env_name)
 	{
 		found = !_strcmp_limit(environ[i], env_name, len) && environ[i][len] == '=';
 		if (found)
-			return (&environ[i][len + 1]);
+			return (_strdup(&environ[i][len + 1]));
 	}
 	return (NULL);
 }
@@ -95,5 +97,50 @@ char *_check_command(char *command)
 	}
 	free(copy_env);
 	free(test_char);
+	return (NULL);
+}
+/**
+ * _check_command_valid - check if the command exist or not
+ * @command: command to check
+ *
+ * Return: checked command
+*/
+char *_check_command_valid(char *command)
+{
+	char *path = NULL, *abs_path = NULL, *dir = NULL;
+	struct stat st;
+	int i;
+
+	for (i = 0; command[i]; i++)
+	{
+		if (command[i] == '/')
+		{
+			if (stat(command, &st) == 0)
+				return (_strdup(command));
+			return (NULL);
+		}
+	}
+	path = _getenv("PATH");
+	if (path == NULL)
+		return (NULL);
+	dir = strtok(path, ":");
+	while (dir)
+	{
+		abs_path = malloc(sizeof(char) * (_strlen(dir) + _strlen(command) + 2));
+		if (abs_path)
+		{
+			_strcpy(abs_path, dir);
+			_strcat(abs_path, "/");
+			_strcat(abs_path, command);
+			if (stat(abs_path, &st) == 0)
+			{
+				free(path);
+				return (abs_path);
+			}
+			free(abs_path), abs_path = NULL;
+			dir = strtok(NULL, ":");
+		}
+	}
+	free(path);
 	return (NULL);
 }

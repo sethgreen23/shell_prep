@@ -15,7 +15,7 @@ char *_read_cmd()
 	n_char = getline(&line, &len, stdin);
 	if (n_char == -1)
 	{
-		free(line);
+		free(line), line = NULL;
 		return (NULL);
 	}
 	if (line[_strlen(line) - 1] == '\n')

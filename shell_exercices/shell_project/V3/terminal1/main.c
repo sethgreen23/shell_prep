@@ -20,25 +20,22 @@ int main(int ac, char **av)
 		{
 			if (isatty(STDIN_FILENO))
 				write(STDOUT_FILENO, "\n", 1);
+			free(line);
 			return (status);
 		}
 		command = _tokenizer(line);
 		if (command == NULL)
-		{
-			free2D(command);
-			free(line);
 			continue;
-		}
-		free(line);
+		free(line), line = NULL;
 		checked_command = _check_command(command[0]);
 		if (checked_command == NULL)
 		{
-			free2D(command);
-			free(checked_command);
+			free2D(command), command = NULL;
 			continue;
 		}
 		command[0] = checked_command;
 		status = _execute(command, av);
+		free(checked_command), checked_command = NULL;
 	}
 	return (status);
 }

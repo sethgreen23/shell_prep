@@ -7,11 +7,11 @@
  *
  * Return: 0 is succes, 1 if fails
 */
-int main(int ac, int **av)
+int main(int ac, char **av)
 {
 	char *line = NULL;
 	char **cmd = NULL;
-	int stat = 0;
+	int stat = 0, index = 0;
 
 	(void)ac;
 	while (1)
@@ -23,10 +23,11 @@ int main(int ac, int **av)
 				write(STDOUT_FILENO, "\n", 1);
 			return (stat);
 		}
+		index++;/* we read the empty lines too*/
 		cmd = _tokenizer(line);
 		if (cmd == NULL)
 			continue;
-		free2D(cmd), cmd = NULL;
+		stat = _execute(cmd, av, index);
 	}
 	return (stat);
 }

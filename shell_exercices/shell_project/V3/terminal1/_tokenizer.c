@@ -13,12 +13,11 @@ char **_tokenizer(char *line)
 	if (line == NULL)
 		return (NULL);
 	line_cp = _strdup(line);
-	if (line_cp == NULL)
-		return (NULL);
 	token = strtok(line_cp, DELIM);
 	if (token == NULL)
 	{
-		free(line_cp);
+		free(line_cp), line_cp = NULL;
+		free(line), line = NULL;
 		return (NULL);
 	}
 	while (token != NULL)
@@ -26,23 +25,22 @@ char **_tokenizer(char *line)
 		len++;
 		token = strtok(NULL, DELIM);
 	}
-	free(line_cp);
+	free(line_cp), line_cp = NULL;
 	cmd = malloc(sizeof(char *) * (len + 1));
 	if (cmd == NULL)
+	{
+		free(line), line = NULL;
 		return (NULL);
+	}
 	token = strtok(line, DELIM);
 	i = 0;
 	while (token != NULL)
 	{
 		cmd[i] = _strdup(token);
-		if (cmd[i] == NULL)
-		{
-			free2DI(cmd, i);
-			return (NULL);
-		}
 		token = strtok(NULL, DELIM);
 		i++;
 	}
+	free(line), line = NULL;
 	cmd[i] = NULL;
 	return (cmd);
 }
