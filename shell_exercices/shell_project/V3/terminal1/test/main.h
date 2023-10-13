@@ -18,6 +18,6 @@ char *_strcpy(char *dest, char *src);
 int _strlen(char *s);
 int _strcmp_limit(char *s1, char *s2, int limit);
 char *_getenv(char *env_name);
-
+char *check_command(char *command);
 
 #endif

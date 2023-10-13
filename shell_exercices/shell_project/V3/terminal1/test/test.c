@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * main - main function
  *
@@ -6,8 +7,12 @@
 */
 int main(void)
 {
-	int i, j;
-	size_t n = 4;
+	/**
+	 * 
+	 * 
+	 * 
+	 * int i, j;
+	 * size_t n = 4;
 	char *key = "PATH";
 	char *command = "ls";
 	char *copy_env = NULL, *token = NULL;
@@ -45,5 +50,17 @@ int main(void)
 	}
 	printf("%s is not a linux command\n", command);
 	free(copy_env);
+	*/
+	char *command ;
+	char *result;
+
+	command = malloc(sizeof(char) * 8);
+	if (command == NULL)
+		return (0);
+	command = _strcpy(command,  "/bin/bs");
+	result = check_command(command);
+	if (result != NULL)
+		free(result);
+	free(command);
 	return (0);
 }

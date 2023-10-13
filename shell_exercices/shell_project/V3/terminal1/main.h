@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 #include <unistd.h>
 extern char **environ;
 
@@ -25,5 +26,6 @@ char *_strcat(char *dest, char *src);
 void free2D(char **arr);
 void free2DI(char **arr, int position);
 char *_getenv(char *env_name);
+char *_check_command(char *command);
 
 #endif
