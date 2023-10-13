@@ -46,28 +46,3 @@ char **_tokenizer(char *line)
 	cmd[i] = NULL;
 	return (cmd);
 }
-
-/**
- * int main (void)
-{
-	char line[12] = "hello world", **command = NULL;
-	int i = 0;
-
-
-	command = _tokenizer(line);
-	if (command == NULL)
-	{
-		printf("command is not tokenized\n");
-		need to free lien
-		return (0);
-	}
-		need to free lien
-	for (; command[i] != NULL; i++)
-	{
-		printf("%s\n", command[i]);
-	}
-	free2D(command);
-	return (0);
-}
-
-*/

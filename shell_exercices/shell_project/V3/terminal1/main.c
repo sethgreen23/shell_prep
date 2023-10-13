@@ -25,6 +25,7 @@ int main(int ac, char **av)
 		command = _tokenizer(line);
 		if (command == NULL)
 		{
+			free2D(command);
 			free(line);
 			continue;
 		}
@@ -33,10 +34,10 @@ int main(int ac, char **av)
 		if (checked_command == NULL)
 		{
 			free2D(command);
+			free(checked_command);
 			continue;
 		}
-		command[0] = _strdup(checked_command);
-		free(checked_command);
+		command[0] = checked_command;
 		status = _execute(command, av);
 	}
 	return (status);

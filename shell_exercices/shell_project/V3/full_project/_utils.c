@@ -83,9 +83,8 @@ char *_check_command(char *command)
 	while (token)
 	{
 		test_char = malloc(sizeof(char) * (_strlen(token) + _strlen(command) + 2));
-		if (test_char == NULL)
-			return (NULL);
-		_strcpy(test_char, token), _strcat(test_char, "/");
+		_strcpy(test_char, token);
+		_strcat(test_char, "/");
 		_strcat(test_char, command);
 		if (!stat(test_char,  &st))
 		{
