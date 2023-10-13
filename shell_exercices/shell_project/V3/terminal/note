@@ -1,4 +1,0 @@
-*getline	
-	return NULL
-		when there is end of file we free before return
-

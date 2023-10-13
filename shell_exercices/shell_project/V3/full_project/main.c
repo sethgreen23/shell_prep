@@ -27,7 +27,10 @@ int main(int ac, char **av)
 		cmd = _tokenizer(line);
 		if (cmd == NULL)
 			continue;
-		stat = _execute(cmd, av, index);
+		if (verify_built_in(cmd[0]))
+			handle_builtin_func(cmd, &stat, av, index);
+		else
+			stat = _execute(cmd, av, index);
 	}
 	return (stat);
 }
