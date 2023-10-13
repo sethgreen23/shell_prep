@@ -94,5 +94,6 @@ char *_check_command(char *command)
 		token = strtok(NULL, ":");
 	}
 	free(copy_env);
-	return (test_char);
+	free(test_char);
+	return (NULL);
 }
