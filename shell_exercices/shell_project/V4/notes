@@ -1,0 +1,21 @@
+-test for strlen strdup
+/**
+ int main(void)
+{
+	char str[] = "hello world";
+	char *copy = NULL;
+
+	copy = _strdup(str);
+	if (copy == NULL)
+		return (1);
+	printf("[original]: %s\n", str);
+	printf("[copy]: %s\n", copy);
+	copy[0] = 'm';
+	printf("[original]: %s\n", str);
+	printf("[copy]: %s\n", copy);
+	free(copy);
+	return (0);
+}
+
+
+*/
