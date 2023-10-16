@@ -26,6 +26,11 @@ int main(int ac, char **av)
 		command = _tokenizer(line);
 		if (command == NULL)
 			continue;
-		status = execute(command, av, index);
+		if (is_builtins(av, ac, command, &index, &status) == 1)
+		{
+			handle_builtins(av, ac, command, &index, &status);
+		}
+		else
+			status = execute(command, av, index);
 	}
 }
